@@ -2,6 +2,7 @@ import { Body, Controller, Get, Post, Res, UsePipes, ValidationPipe } from "@nes
 import { AuthService } from "./auth.service";
 import { CreateUserDto } from "./dto/create-user.dto";
 import {Response} from 'express'
+import { loginDto } from "./dto/login.dto";
 
 @Controller('auth')
 export class AuthController{
@@ -18,8 +19,18 @@ export class AuthController{
         return res.status(500).send({ status: 500, data: {}, message: err.message });
       }
     }
-    @Get()
-    getUsers(){
-        return "get users";
+    @Post('/login') 
+    @UsePipes(new ValidationPipe())
+    async login(@Body() loginData: loginDto, @Res() res: Response) {
+      try {
+        let response:any = await this._AuthService.loginUser(loginData);
+        if(response.status === 403) 
+          return res.status(403).send({status:403,data:{},message:"Invalid credentials"});
+        if(response.status === 404)
+          return res.status(404).send({status:404,data:{},message:"User not found"});
+        return res.status(201).send({status:201,data:(response),message:"User found"});
+      } catch (err) {
+        throw err.message;
+      }
     }
 }
