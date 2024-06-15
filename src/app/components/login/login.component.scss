@@ -1,0 +1,83 @@
+.example-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+  
+  mat-card {
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    padding: 12px;
+  }
+  
+  mat-card-header {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  mat-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+  
+  mat-card-title {
+    margin-bottom: 10px;
+    font-size: 24px;
+  }
+  
+  mat-form-field {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  
+  mat-error {
+    color: #f44336;
+    font-size: 14px;
+    padding-bottom: 10px;
+  }
+  
+  .example-form button {
+    width: 100%;
+    margin-top: 10px;
+  }
+  .example-form .submit:disabled {
+    background-color: #A7E6FF;
+    height: 3em;
+  }
+  .example-form .submit:enabled {
+    background-color: #007bff;
+    height: 3em;
+  }
+  .example-form h2 {
+    font-size: 34px;
+    font-weight: bold;
+    text-align: center;
+    margin: 24px;
+    color: #050C9C;
+  }
+  .forgot{
+    display: flex;
+    float: right;
+    color: #2f8be8;
+    margin: 20px;
+    margin-top: 0;
+    right: 0;
+  }
+  .forgot:hover{
+    color: #024f9c;
+  }
+  .my_class1{
+    background-color: red;
+
+  }
+  .my_class2{
+    background-color: green;
+  }
