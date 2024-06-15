@@ -36,21 +36,21 @@ export class LoginComponent {
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
         Validators.required,
-        
       ]),
     });
   }
   ngOnInit(): void {
-    // if(this.authService.getAuthToken()){
-    //   this.routes.navigateByUrl('');
-    // }
+    if(this.authService.getAuthToken()){
+      this.routes.navigateByUrl('');
+    }
   }
 
   onSubmit() {
     if (this.loginForm.valid) {
       this.authService.verifyUser(this.loginForm.value).subscribe((res) => {
-        if (res.token) {
-          localStorage.setItem('token', res.token);
+        console.log(res)
+        if (res.data) {
+          localStorage.setItem('token', res.data.token);
           this.routes.navigateByUrl('');
         } else {
           this.msg = res.message;

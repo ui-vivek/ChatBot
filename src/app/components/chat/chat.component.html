@@ -1,0 +1,31 @@
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <img class="img-size" src="https://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/robot-face.png" alt="" />
+            <h2>Chatbot</h2>
+            <button class="logout-button" (click)="logOut()">Logout</button>
+        </div>
+        <div class="chat-body" #scrollframe>
+            <ng-container *ngIf="messages.length > 0">
+                @for (msg of messages; track msg) {
+                    @if(msg.sender === "YOU") {
+                        <div class="message bot-message">
+                            <p [innerHTML]="msg.message"></p>
+                            <span class="message-time">{{ msg.timestamp | date : "shortTime" }}</span>
+                        </div>
+                    } @else {
+                        <div class="message user-message">
+                            <p [innerHTML]="msg.message"></p>
+                            <span class="message-time">{{ msg.timestamp | date : "shortTime" }}</span>
+                        </div>
+                    }
+                }
+            </ng-container>
+
+        </div>
+        <form class="chat-footer" (submit)="sendMessage(message)">
+            <input type="text" #textareaRef autofocus autocomplete="off" maxlength="1000" name="messageInput" [(ngModel)]="message" (keyup.enter)="sendMessage(message)" placeholder="Type a message..." class="chat-input">
+            <button class="send-button">Send</button>
+        </form>
+    </div>
+</body>

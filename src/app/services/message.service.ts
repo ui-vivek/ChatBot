@@ -12,7 +12,7 @@ export class MessageService {
   constructor(private http: HttpClient) {}
 
   message(msg: string) : Observable<GreetingResponse> {
-    return this.http.post<GreetingResponse>(this.baseUrl + '/chatbot', {message: msg}).pipe(
+    return this.http.post<GreetingResponse>(this.baseUrl + '/bot/chat', {message: msg}).pipe(
       catchError((error) => {
         console.error('Error fetching data:', error);
         return throwError(error);
