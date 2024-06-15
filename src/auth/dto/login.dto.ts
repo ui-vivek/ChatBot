@@ -10,7 +10,4 @@ export class loginDto {
   @IsString()
   password: string;
   
-  @IsNotEmpty()
-  @IsBoolean()
-  checkbox: boolean;
 }

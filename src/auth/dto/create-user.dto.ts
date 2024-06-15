@@ -10,16 +10,9 @@ export class CreateUserDto {
     @IsNotEmpty()
     email: string;
   
-    @IsInt()
-    postcode: number;
-  
     @IsEnum(['Male', 'Female', 'Others'])
     @IsNotEmpty()
     gender: string;
-  
-    @IsString()
-    @IsNotEmpty()
-    dob: string;
   
     @IsString()
     @MinLength(8)
@@ -27,6 +20,6 @@ export class CreateUserDto {
     
     @IsString()
     @MinLength(8)
-    confirmPassword: string;
+    confirmpassword: string;
   }
   

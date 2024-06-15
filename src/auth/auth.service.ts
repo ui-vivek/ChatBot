@@ -22,7 +22,6 @@ export class AuthService {
     try {
       const user = await this.userModel.find({
         email: email,
-        isDeleted: false,
       });
       if (user.length > 0) return user[0];
     } catch (error) {
@@ -32,7 +31,7 @@ export class AuthService {
   }
 
   async createNewUser(userRegistration: CreateUserDto) {
-    if (userRegistration.password !== userRegistration.confirmPassword) {
+    if (userRegistration.password !== userRegistration.confirmpassword) {
       return {
         status: 422,
         data: {},
@@ -41,7 +40,7 @@ export class AuthService {
     }
     try {
       const user = await this.findUserByEmail(userRegistration.email);
-      delete userRegistration.confirmPassword;
+      delete userRegistration.confirmpassword;
       const hashedPassword = await bcrypt.hash(userRegistration.password, 10);
       userRegistration.password = hashedPassword;
       const newUser = await this.userModel.create(userRegistration);
@@ -70,7 +69,7 @@ export class AuthService {
           user.password,
         );
         if (passwordCompare) {
-          const expiresIn = loginData?.checkbox ? '24h' : '1h';
+          const expiresIn = '24h'
           let token = await this.jwtService.signAsync(
             { id: user._id },
             {

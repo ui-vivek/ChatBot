@@ -1,6 +1,8 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { BotService } from './bot.service';
+import { AuthenticationGuard } from 'src/guards/auth.guard';
 
+@UseGuards(AuthenticationGuard)
 @Controller('bot')
 export class BotController {
   constructor(private botService: BotService) {}

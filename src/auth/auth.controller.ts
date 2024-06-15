@@ -4,7 +4,7 @@ import { CreateUserDto } from "./dto/create-user.dto";
 import {Response} from 'express'
 import { loginDto } from "./dto/login.dto";
 
-@Controller('auth')
+@Controller('user')
 export class AuthController{
     constructor(private _AuthService: AuthService,){}
 
@@ -19,7 +19,7 @@ export class AuthController{
         return res.status(500).send({ status: 500, data: {}, message: err.message });
       }
     }
-    @Post('/login') 
+    @Post('/sign-in') 
     @UsePipes(new ValidationPipe())
     async login(@Body() loginData: loginDto, @Res() res: Response) {
       try {
