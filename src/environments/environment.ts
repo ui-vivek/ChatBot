@@ -5,6 +5,6 @@
 // };
 export const environment = {
     production: true,
-    apiUrl: 'https://chatbot-eiki.onrender.com/api/v1/',
+    apiUrl: 'https://chatbot-eiki.onrender.com/api/v1',
     debugMode: false,
 };
