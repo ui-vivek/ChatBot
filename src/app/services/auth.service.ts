@@ -21,7 +21,14 @@ export class AuthService {
       })
     );
   }
-
+  registerUser(userData:any){
+    return this.httpClient.post(this.API_URL + '/user/sign-up', userData).pipe(
+      catchError((error) => {
+        console.error('Error fetching user', error);
+        return throwError(() => new Error('Error fetching user'));
+      })
+    );
+  }
   redirectToLoginPage() {
     return this.router.navigate(['/login']);
   }

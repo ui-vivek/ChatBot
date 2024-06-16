@@ -19,7 +19,7 @@ import { AuthService } from '../../services/auth.service';
   standalone: true,
   imports: [CommonModule, FormsModule, MatIconModule],
   templateUrl: './chat.component.html',
-  styleUrl: './chat.component.css',
+  styleUrl: './chat.component.scss',
 })
 export class ChatComponent implements OnInit, AfterViewChecked {
   @ViewChild('scrollframe') scrollFrame!: ElementRef;
