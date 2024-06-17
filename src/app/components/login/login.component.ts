@@ -62,4 +62,7 @@ export class LoginComponent {
     }
   }
 
+  onLogin() {
+    this.routes.navigate(['register']);
+  }
 }
