@@ -27,10 +27,6 @@ export class User extends Document {
   @IsEmail()
   email: string;
 
-  @Prop({ required: true, enum: ['Male', 'Female', 'Others'] })
-  @IsEnum(['Male', 'Female', 'Others'])
-  gender: string;
-
   @Prop({ required: true, minlength: 8 })
   password: string;
     
