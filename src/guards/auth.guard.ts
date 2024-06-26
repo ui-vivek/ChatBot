@@ -19,8 +19,7 @@ export class AuthenticationGuard implements CanActivate {
     return this.validateRequest(request);
   }
 
-  private validateRequest(request: Request): any {
-    console.log("ppppppppp")
+   private async validateRequest(request: Request) {
     const authHeader = request.headers['authorization'];
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       throw new UnauthorizedException('Invalid token format');
@@ -31,7 +30,11 @@ export class AuthenticationGuard implements CanActivate {
       if(!decodedToken){
         throw new UnauthorizedException('Invalid token format');
       }
-      request.headers.userId = decodedToken.id;
+      let user = await this.userModel.findOne({_id: decodedToken.id},{password : 0})
+      if(!user){
+        throw new UnauthorizedException('User not found');
+      }
+      request.headers.user = JSON.stringify(user);
       return true;
     } catch (error) {
       console.log("error", error)

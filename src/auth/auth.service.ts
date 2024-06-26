@@ -31,15 +31,21 @@ export class AuthService {
   }
 
   async createNewUser(userRegistration: CreateUserDto) {
-    if (userRegistration.password !== userRegistration.confirmpassword) {
-      return {
-        status: 422,
-        data: {},
-        message: 'Password does not match confirm password',
-      };
-    }
     try {
+      if (userRegistration.password !== userRegistration.confirmpassword) {
+        return {
+          status: 422,
+          data: {},
+          message: 'Password does not match confirm password',
+        };
+      }
       const user = await this.findUserByEmail(userRegistration.email);
+      if(user)
+        return {
+          status: 422,
+          data: {},
+          message: 'User already exists',
+        };
       delete userRegistration.confirmpassword;
       const hashedPassword = await bcrypt.hash(userRegistration.password, 10);
       userRegistration.password = hashedPassword;

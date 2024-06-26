@@ -7,7 +7,7 @@ export class BotService {
   constructor() {
     this.genAI = new GoogleGenerativeAI(process.env.API_KEY);
   }
-  async getChatbotResponse(message: string) {
+  async getChatbotResponse(message: string,user:any) {
     try {
       if (!message) throw new Error('Please provide a message');
       const generationConfig = {
@@ -28,20 +28,14 @@ export class BotService {
         .startChat({
           generationConfig,
           history: [
-            {
-              role: 'user',
-              parts: [{ text: `${Date.now()}` }],
-            },
-            {
-              role: 'user',
-              parts: [{ text: 'My name is vivek singh' }],
-            },
+        
           ],
         })
         .sendMessage(message);
       const response = await result.response;
       let text = await response.text();
       history.push({ role: 'model', parts: [{ text }] });
+      console.log(history)
       return { response: text };
     } catch (error) {
       console.error('Error interacting with chatbot:', error);
