@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
@@ -21,14 +21,20 @@ export class AuthService {
       })
     );
   }
-  registerUser(userData:any){
+  registerUser(userData: any) {
     return this.httpClient.post(this.API_URL + '/user/sign-up', userData).pipe(
-      catchError((error) => {
-        console.error('Error fetching user', error);
-        return throwError(() => new Error('Error fetching user'));
+      catchError((error: HttpErrorResponse) => {
+        console.log(error)
+        let errorMessage = 'An unknown error occurred.';
+  
+        if (error.error && typeof error.error === 'object' && 'error' in error) {
+          errorMessage = error.error.message; // Extract the error message directly
+        }
+        return throwError(() => new Error(errorMessage));
       })
     );
   }
+  
   redirectToLoginPage() {
     return this.router.navigate(['/login']);
   }

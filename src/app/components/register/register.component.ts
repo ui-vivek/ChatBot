@@ -79,7 +79,7 @@ export class RegisterComponent {
         },
         (error) => {
           console.error(error);
-          this.msg = 'An error occurred during registration'; // Generic error message
+          this.msg = error.message; // Display the specific error message
         }
       );
     }
